@@ -67,6 +67,16 @@ const OhmCalculator = () => {
   //     console.log(ohmAsUSD);
   //   }, []);
 
+  const moneyFormatter = (money) => {
+    const formatted = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    }).format(money);
+
+    return formatted;
+  };
+
   const Inputs = () => {
     const {
       register,
@@ -78,9 +88,8 @@ const OhmCalculator = () => {
       console.log(values);
       //   sendJob(values);
       //    onClose();
+      setStakedOhm(Number(values.stakedOhm));
     };
-
-    watch('stakedOhm');
 
     return (
       <>
@@ -111,23 +120,23 @@ const OhmCalculator = () => {
 
         <Inputs />
 
-        <h3>Basic Inputs</h3>
+        <Heading>Basic Inputs</Heading>
         <p>OHM Staked: {stakedOhm} OHM</p>
-        <p>OHM Live Price: ${ohmLivePrice}</p>
-        <p>OHM Manual Price: ${ohmManualPrice}</p>
+        <p>OHM Live Price: {moneyFormatter(ohmLivePrice)}</p>
+        <p>OHM Manual Price: {moneyFormatter(ohmManualPrice)}</p>
         <p>Rebase Rate: {rebaseRate}%</p>
 
-        <h3>Basic Outputs</h3>
-        <p>Current Worth ${currentWorth}</p>
+        <Heading>Basic Outputs</Heading>
+        <p>Current Worth {moneyFormatter(currentWorth)}</p>
         <p>Daily ROI: {dailyROI}%</p>
         <p>Weekly ROI: {weeklyROI}%</p>
         <p>Monthly ROI: {monthlyROI}%</p>
         <p>Yearly ROI: {yearlyROI}%</p>
 
-        <h3>Goal Targeter</h3>
-        <p>USD Target: ${usdTarget}</p>
+        <Heading>Goal Targeter</Heading>
+        <p>USD Target: {moneyFormatter(usdTarget)}</p>
         <p>
-          {usdTargetCalculated} Days Until ${usdTarget}
+          {usdTargetCalculated} Days Until {moneyFormatter(usdTarget)}
         </p>
 
         <p>OHM Target</p>
