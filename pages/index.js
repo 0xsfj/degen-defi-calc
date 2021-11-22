@@ -13,7 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SimpleGrid as="main">
+      <SimpleGrid as="main" columns={2} spacing={10}>
         <Flex direction="column" p="8">
           <Heading as="h1" size="2xl" mb={4}>
             Defi Calculator
@@ -22,7 +22,7 @@ export default function Home() {
             The calculator for Olympus DAO(OHM), Wonderland(TIME), Klima DAO(KLIMA)
           </Text>
         </Flex>
-        <Box>
+        <Box p="8">
           <Tabs isFitted variant="enclosed">
             <TabList mb="1em">
               <Tab>

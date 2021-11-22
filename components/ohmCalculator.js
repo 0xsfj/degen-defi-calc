@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Heading, Text, Box } from '@chakra-ui/react';
+import { Heading, Text, Box, FormControl, Input, Button, FormLabel, FormErrorMessage, SimpleGrid } from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
 
 // OHM Staking Calculator
 // Input Fields
@@ -66,10 +67,49 @@ const OhmCalculator = () => {
   //     console.log(ohmAsUSD);
   //   }, []);
 
+  const Inputs = () => {
+    const {
+      register,
+      handleSubmit,
+      watch,
+      formState: { errors },
+    } = useForm();
+    const onSubmit = (values) => {
+      console.log(values);
+      //   sendJob(values);
+      //    onClose();
+    };
+
+    watch('stakedOhm');
+
+    return (
+      <>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormControl mb="4">
+            <FormLabel htmlFor="stakedOhm">How many OHM will you stake?</FormLabel>
+            <Input placeholder="70" type="number" {...register('stakedOhm', { required: true })} />
+            {errors.stakedOhm && <FormErrorMessage>This field is required</FormErrorMessage>}
+            <Text>Thats currently worth: ${currentWorth}</Text>
+          </FormControl>
+
+          <Button mt={4} mb={4} colorScheme="blue" type="submit">
+            Save Settings
+          </Button>
+        </form>
+      </>
+    );
+  };
+
   return (
     <>
       <Box>
-        <h2>Ω Olymus DAO Calc</h2>
+        <Heading mb="4">Ω Olympus DAO Calc</Heading>
+        <SimpleGrid columns="2">
+          <Box>Rebase Rate: {rebaseRate}</Box>
+          <Box>Rebase Rate: {rebaseRate}</Box>
+        </SimpleGrid>
+
+        <Inputs />
 
         <h3>Basic Inputs</h3>
         <p>OHM Staked: {stakedOhm} OHM</p>
