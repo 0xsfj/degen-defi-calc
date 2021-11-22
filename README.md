@@ -22,7 +22,7 @@ deficalc.com
 
 ## Run Locally
 
-If you see anything incorect please submit a pull request and it will be reviewed. 
+If you see anything incorect please submit a pull request and it will be reviewed.
 
 ### Run the development server:
 

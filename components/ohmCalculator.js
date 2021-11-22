@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Heading, Text, Box } from '@chakra-ui/react';
 
 // OHM Staking Calculator
 // Input Fields
@@ -67,7 +68,7 @@ const OhmCalculator = () => {
 
   return (
     <>
-      <div>
+      <Box>
         <h2>Ω Olymus DAO Calc</h2>
 
         <h3>Basic Inputs</h3>
@@ -91,7 +92,7 @@ const OhmCalculator = () => {
 
         <p>OHM Target</p>
         <p>Days Until {ohmTargetCalculated}</p>
-      </div>
+      </Box>
     </>
   );
 };
