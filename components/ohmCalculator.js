@@ -27,11 +27,33 @@ import { useForm } from 'react-hook-form';
 // OHM Target
 // Days Untill OHM Target
 
+// Tools
+// USD Formatter
+const moneyFormatter = (money) => {
+  const formatted = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  }).format(money);
+
+  return formatted;
+};
+
+// Percentage Formatter
+const percentageFormatter = (percent) => {
+  const formatted = new Intl.NumberFormat('en-US', {
+    style: 'percent',
+    minimumFractionDigits: 2,
+  }).format(percent);
+
+  return formatted;
+};
+
 const OhmCalculator = () => {
   const STAKED_OHM = 70;
   const OHM_MANUAL_PRICE = 1000;
   const OHM_LIVE_PRICE = 800;
-  const REBASE_RATE = 0.4061;
+  const REBASE_RATE = 0.004061;
 
   const [stakedOhm, setStakedOhm] = useState(STAKED_OHM);
   const [ohmManualPrice, setOhmManualPrice] = useState(OHM_MANUAL_PRICE);
@@ -53,11 +75,15 @@ const OhmCalculator = () => {
   const dailyROI = rebaseRate * 3;
   //   const weeklyROI = Math.pow(100.41, 21) - 1;
   // Weekly ROI %
-  const weeklyROI = dailyROI * 7;
+  const weeklyROI = Math.pow(rebaseRate + 1, 7 * 3) - 1;
   // Monthly ROI %
-  const monthlyROI = dailyROI * 30;
+  const monthlyROI = Math.pow(rebaseRate + 1, 30 * 3) - 1;
   // Yearly ROI %
-  const yearlyROI = rebaseRate * (365 * 3);
+  // (D7+1)^1095 -1
+  const yearlyROI = Math.pow(rebaseRate + 1, 365 * 3) - 1;
+  //   const yearlyROI = yearlyROICalc.toLocaleString('en', { style: 'percent' });
+
+  //   const yearlyROI = rebaseRate * (365 * 3);
 
   // Weekly ROI %
   // Monthly ROI %
@@ -66,16 +92,6 @@ const OhmCalculator = () => {
   //     console.log('OhmCalculator');
   //     console.log(ohmAsUSD);
   //   }, []);
-
-  const moneyFormatter = (money) => {
-    const formatted = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2,
-    }).format(money);
-
-    return formatted;
-  };
 
   const Inputs = () => {
     const {
@@ -113,9 +129,31 @@ const OhmCalculator = () => {
     <>
       <Box>
         <Heading mb="4">Ω Olympus DAO Calc</Heading>
-        <SimpleGrid columns="2">
-          <Box>Rebase Rate: {rebaseRate}</Box>
-          <Box>Rebase Rate: {rebaseRate}</Box>
+        <SimpleGrid columns="4" mb="8">
+          <Box>
+            <Heading size="lg" mb={2}>
+              {percentageFormatter(rebaseRate)}
+            </Heading>
+            <Text>Rebase Rate</Text>
+          </Box>
+          <Box>
+            <Heading size="lg" mb={2}>
+              {percentageFormatter(dailyROI)}
+            </Heading>
+            <Text>Daily ROI</Text>
+          </Box>
+          <Box>
+            <Heading size="lg" mb={2}>
+              {percentageFormatter(weeklyROI)}
+            </Heading>
+            <Text>Weekly ROI</Text>
+          </Box>
+          <Box>
+            <Heading size="lg" mb={2}>
+              {percentageFormatter(monthlyROI)}
+            </Heading>
+            <Text>Monthly ROI</Text>
+          </Box>
         </SimpleGrid>
 
         <Inputs />
@@ -124,14 +162,14 @@ const OhmCalculator = () => {
         <p>OHM Staked: {stakedOhm} OHM</p>
         <p>OHM Live Price: {moneyFormatter(ohmLivePrice)}</p>
         <p>OHM Manual Price: {moneyFormatter(ohmManualPrice)}</p>
-        <p>Rebase Rate: {rebaseRate}%</p>
+        <p>Rebase Rate: {percentageFormatter(rebaseRate)}</p>
 
         <Heading>Basic Outputs</Heading>
         <p>Current Worth {moneyFormatter(currentWorth)}</p>
-        <p>Daily ROI: {dailyROI}%</p>
-        <p>Weekly ROI: {weeklyROI}%</p>
-        <p>Monthly ROI: {monthlyROI}%</p>
-        <p>Yearly ROI: {yearlyROI}%</p>
+        <p>Daily ROI: {percentageFormatter(dailyROI)}</p>
+        <p>Weekly ROI: {percentageFormatter(weeklyROI)}</p>
+        <p>Monthly ROI: {percentageFormatter(monthlyROI)}</p>
+        <p>Yearly ROI: {percentageFormatter(yearlyROI)}</p>
 
         <Heading>Goal Targeter</Heading>
         <p>USD Target: {moneyFormatter(usdTarget)}</p>

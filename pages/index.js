@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 // import styles from '../styles/Home.module.css';
-import { Box, Flex, Heading, Text, Tabs, TabList, Tab, TabPanels, TabPanel, SimpleGrid, Stack, HStack, Icon, useColorModeValue } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, Tabs, TabList, Tab, TabPanels, TabPanel, SimpleGrid, Stack, HStack, Icon, useColorModeValue, Container } from '@chakra-ui/react';
 import { BellIcon } from '@chakra-ui/icons';
 import OhmCalculator from '../components/ohmCalculator';
 
@@ -96,6 +96,17 @@ export default function Home() {
           </Tabs>
         </Box>
       </SimpleGrid>
+      <Box>
+        <Container>
+          <Heading>Disclaimer</Heading>
+          <Text fontSize="sm" color="gray.500">
+            The stated APR is denominated in terms of the represented TOKEN, not USD or other fiat currency. The Rate is a forward-looking projection based on mathmatical project results over the relevant period, but such belief is subject to numerous assumptions, risks and uncertainties (including
+            smart contract security risks and third-party actions) which could result in a materially different (lower or higher) Rate. The Rate is not a promise, guarantee or undertaking on the part of any person or group of persons, but depends entirely on the results of operation of smart
+            contracts and other autonomous systems (including third-party systems) and how third parties interact with those systems after the time of your deposit. Even if the projected Rate is achieved, you may still suffer a financial loss in fiat-denominated terms if the fiat-denominated value
+            of the relevant tokens declines during the deposit period.
+          </Text>
+        </Container>
+      </Box>
     </>
   );
 }
