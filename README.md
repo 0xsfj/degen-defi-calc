@@ -8,21 +8,22 @@ This is all of the open source defi calculators avalible in one web app.
 [https://www.figma.com/file/PS5nuM29NpV8Vg0D7YqS2A/Defi-Calculator?node-id=0%3A1]
 
 ## Features
--[] Currency Changer
--[] Live Data
--[] Correct Links
+- [ ] Currency Changer
+- [ ] Live Data
+- [ ] Correct Links
+- [x] Decimal to Percentage
 
 ## OHM
--[] Write Initial Calculations
--[] Pull Live Data
+- [ ] Write Initial Calculations
+- [ ] Pull Live Data
 
 ## Time Wonderland
--[] Write Initial Calculations
--[] Pull Live Data
+- [ ] Write Initial Calculations
+- [ ] Pull Live Data
 
 ## Klima Dao
--[] Write Initial Calculations
--[] Pull Live Data
+- [ ] Write Initial Calculations
+- [ ] Pull Live Data
 
 
 ## Run Locally
